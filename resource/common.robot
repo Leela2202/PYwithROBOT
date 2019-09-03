@@ -10,6 +10,15 @@ Generic Suite Setup
     Maximize Browser Window
     Set Selenium Timeout    ${timeout}
     Register Keyword To Run On Failure    ${EMPTY}
+    
+Input username
+    [Arguments]  ${username}
+        Input Text  name=uname  ${username}
+Input pwd
+    [Arguments]  ${password}
+        Input Text    name=psw    ${password}
+click login button
+    Click Button  name=submit
 
 Generic Suite Teardown
     Delete All Cookies

@@ -56,4 +56,25 @@ class LoginPage(PageObject):
         if test_status == "FAIL":
             self.selib.capture_page_screenshot()
             log = self.return_browser_console_log()
-            self.print_browser_console_log(log)            
+            self.print_browser_console_log(log)  
+
+    # @keyword('Input username')
+    # def input_username(self,username):
+    #     username = BuiltIn().get_variable_value("${USERNAME}")
+    #     self.se2lib.input_text(self.locator.username, username)
+
+    # @keyword('Input pwd')
+    # def input_pwd(self,password):
+    #     # password = BuiltIn().get_variable_value("${password}") 
+    #     self.se2lib.input_text(self.locator.password, password) 
+
+    # @keyword('click login button')
+    # def click_submit(self):
+    #      self.selib.click_button(self.locator.submit_button)
+
+    @keyword('Error page should be visible')
+    def error_info(self):
+         errorinfo = self.selib.get_text(self.locator.main_message)
+         if errorinfo != "Hello":
+            raise AssertionError("Doesn't Match")                        
+
