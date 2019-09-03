@@ -8,6 +8,7 @@ Test Template       Invalid login
 Suite Setup         Generic Suite Setup
 Suite Teardown      Generic Suite Teardown
 Test Teardown       Generic Test Teardown
+Test Setup          Open Login Page
 Resource            resource/common.robot
 
 *** Variables ***
