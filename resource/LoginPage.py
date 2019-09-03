@@ -3,6 +3,7 @@ from robot.libraries.BuiltIn import BuiltIn
 from robot.api import logger
 from SeleniumLibrary.base import keyword
 from SeleniumLibrary import SeleniumLibrary
+import csv
 
 class LoginPage(PageObject):
 
@@ -14,17 +15,19 @@ class LoginPage(PageObject):
     }
     
     def login_as_a_normal_user(self):
-         logger.info("WE ARE HERE ::::: HELL WITH IT")
-         username = BuiltIn().get_variable_value("${USERNAME}")
-         password = BuiltIn().get_variable_value("${PASSWORD}") 
-         self.se2lib.input_text(self.locator.username, username)
-         self.se2lib.input_text(self.locator.password, password)
-         with self._wait_for_page_refresh():
-            self.selib.click_button(self.locator.submit_button)
-         errorinfo = self.selib.get_text(self.locator.main_message)
-         if errorinfo != "Hello":
-            raise AssertionError("Doesn't Match")
-        #  logger.info(errorinfo)
+        # logger.info("WE ARE HERE ::::: HELL WITH IT")
+        username = BuiltIn().get_variable_value("${username}")
+        password = BuiltIn().get_variable_value("${password}") 
+        self.se2lib.input_text(self.locator.username, username)
+        self.se2lib.input_text(self.locator.password, password)
+        with self._wait_for_page_refresh():
+           self.selib.click_button(self.locator.submit_button)
+        errorinfo = self.selib.get_text(self.locator.main_message)
+        # if errorinfo != "Hello":
+        #     raise AssertionError("Doesn't Match")
+        # else:
+        #     raise AssertionError("Doesn't Match")
+        logger.info(errorinfo)
 
 
     def handle_alert_if_shown(self):
@@ -47,7 +50,22 @@ class LoginPage(PageObject):
     def print_browser_console_log(self, log):
         if log.__len__() > 1:
             for message in log:
-                print(message)            
+                print(message)
+
+    def loop(self, size):
+        for i in range(1, len(size)):
+            for j in range(len(size[i])):
+            #    print(size[i][j])
+               logger.info(size[i][j])
+               data = size[i][j]
+               splitdata = data.split(',')
+        return splitdata
+
+    def read_csv_file(self, filename):
+        file = open(filename, 'r')
+        csvfile = csv.reader(file)
+        file.close
+        return [row for row in csvfile]
 
     @keyword('Generic Test Teardown')
     def generic_test_teardown(self):

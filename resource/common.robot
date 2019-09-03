@@ -1,6 +1,9 @@
 *** Settings ***
 Library             SeleniumLibrary
 Library             LoginPage.py
+Library             OperatingSystem
+Library             String
+Library             Collections
 
 *** Keywords ***
 Generic Suite Setup
